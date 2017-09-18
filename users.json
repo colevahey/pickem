@@ -1,1 +1,12 @@
-{"cole": "0cc175b9c0f1b6a831c399e269772661"}
+{
+    "Cole": {
+        "losses": 0,
+        "password": "0cc175b9c0f1b6a831c399e269772661",
+        "wins": 0
+    },
+    "pocho": {
+        "losses": 0,
+        "password": "3bd48fa0c2ccca0cd6b69e07d57bdac0",
+        "wins": 0
+    }
+}
