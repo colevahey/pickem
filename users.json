@@ -1,12 +1,1 @@
-{
-    "Cole": {
-        "losses": 0,
-        "password": "0cc175b9c0f1b6a831c399e269772661",
-        "wins": 0
-    },
-    "pocho": {
-        "losses": 0,
-        "password": "3bd48fa0c2ccca0cd6b69e07d57bdac0",
-        "wins": 0
-    }
-}
+{"test": {"losses": 0, "wins": 0, "password": "90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809"}, "Cole": {"losses": 0, "wins": 0, "password": "abd37534c7d9a2efb9465de931cd7055ffdb8879563ae98078d6d6d5"}}

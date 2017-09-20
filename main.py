@@ -8,15 +8,15 @@ rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/da
 
 data = json.loads(rawhtml.read().decode("utf-8"))
 
+users = open('users.json', 'r')
+userdata = json.loads(users.read())
+
 def login():
     uname = input("Username?\n>> ")
     password = input("Password?\n>> \033[8m")
     print("\033[0m")
 
-    users = open('users.json', 'r')
-    userdata = json.loads(users.read())
-
-    hash_object = hashlib.md5(password.encode())
+    hash_object = hashlib.sha224(password.encode())
     hashpassword = hash_object.hexdigest()
 
     try:
@@ -59,7 +59,7 @@ def main():
 
 def selections(user):
 
-    userselections = {}
+    userselections = [] 
 
     for game in data["games"]:
         if game["odds"]["spread"] != "N/A":
@@ -67,15 +67,28 @@ def selections(user):
             print(game["odds"]["spread"])
             selection = input("Who do you select? (A/H)\n>> ").title()
             if selection == "A":
-                print("You selected " + game["awayTeam"]["displayName"])
-                userselections.update({game["id"]:game["awayTeam"]["displayName"]})
+                print("You selected the " + game["awayTeam"]["displayName"])
+                userselections.append({"id":game["id"],"pick":"away","spread":game["odds"]["spread"]})
             elif selection == "H":
                 print("You selected " + game["homeTeam"]["displayName"])
-                userselections.update({game["id"]:game["homeTeam"]["displayName"]})
+                userselections.append({"id":game["id"],"pick":"home","spread":game["odds"]["spread"]})
             else:
                 print("That pick is invalid. You have to start over now.")
                 input("Press enter to continue")
+                userselections = []
+                selections(user)
+
+    userpicks = open('./picks/picks2.json', 'w+')
+
+    try:
+        userpicksdata = json.loads(userpicks.read())
+    except ValueError:
+        userpicksdata = {}
+
+    userpicksdata.update({user:userselections})
 
     print(userselections)
+    userpicks.write(json.dumps(userpicksdata))
+
 
 login()

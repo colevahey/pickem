@@ -9,7 +9,7 @@ def main():
     users = open('users.json', 'r')
     userdata = json.loads(users.read())
 
-    hash_object = hashlib.md5(password.encode())
+    hash_object = hashlib.sha224(password.encode())
     hashpassword = hash_object.hexdigest()
 
     try:
