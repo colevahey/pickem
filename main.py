@@ -42,21 +42,6 @@ def login():
             print()
             login()
 
-def main():
-    #For each game in the database for that week
-    for game in data["games"]:
-
-        #If the game has a spread
-        if game["odds"]["spread"] != "N/A":
-
-            #Print the teams playing in the game
-            print(game["awayTeam"]["displayName"] + " at " + game["homeTeam"]["displayName"])
-
-            #Print the spread of the game
-            print(game["odds"]["spread"])
-            print()
-            sleep(1)
-
 def selections(user):
 
     userselections = [] 
@@ -68,24 +53,27 @@ def selections(user):
             selection = input("Who do you select? (A/H)\n>> ").title()
             if selection == "A":
                 print("You selected the " + game["awayTeam"]["displayName"])
-                userselections.append({"id":game["id"],"pick":"away","spread":game["odds"]["spread"]})
+                userselections.append({"id":game["id"],"pick":"away","abbreviation":game["awayTeam"]["abbreviation"],"spread":game["odds"]["spread"]})
             elif selection == "H":
                 print("You selected " + game["homeTeam"]["displayName"])
-                userselections.append({"id":game["id"],"pick":"home","spread":game["odds"]["spread"]})
+                userselections.append({"id":game["id"],"pick":"home","abbreviation":game["homeTeam"]["abbreviation"],"spread":game["odds"]["spread"]})
             else:
                 print("That pick is invalid. You have to start over now.")
                 input("Press enter to continue")
                 userselections = []
+                break
                 selections(user)
 
-    userpicks = open('./picks/picks2.json', 'w+')
 
     try:
+        userpicks = open('./picks/picks1.json', 'r')
         userpicksdata = json.loads(userpicks.read())
-    except ValueError:
+    except FileNotFoundError:
         userpicksdata = {}
 
     userpicksdata.update({user:userselections})
+
+    userpicks = open('./picks/picks1.json', 'w')
 
     print(userselections)
     userpicks.write(json.dumps(userpicksdata))
