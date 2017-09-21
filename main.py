@@ -53,10 +53,10 @@ def selections(user):
             selection = input("Who do you select? (A/H)\n>> ").title()
             if selection == "A":
                 print("You selected the " + game["awayTeam"]["displayName"])
-                userselections.append({"id":game["id"],"pick":"away","abbreviation":game["awayTeam"]["abbreviation"],"spread":game["odds"]["spread"]})
+                userselections.append({"id":game["id"],"pick":"away","spread":game["odds"]["spread"]})
             elif selection == "H":
                 print("You selected " + game["homeTeam"]["displayName"])
-                userselections.append({"id":game["id"],"pick":"home","abbreviation":game["homeTeam"]["abbreviation"],"spread":game["odds"]["spread"]})
+                userselections.append({"id":game["id"],"pick":"home","spread":game["odds"]["spread"]})
             else:
                 print("That pick is invalid. You have to start over now.")
                 input("Press enter to continue")
@@ -77,6 +77,5 @@ def selections(user):
 
     print(userselections)
     userpicks.write(json.dumps(userpicksdata))
-
 
 login()
