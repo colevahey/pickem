@@ -34,5 +34,7 @@ def main():
 
     print("User " + uname + " successfully added")
 
+    return uname
+
 if __name__ == '__main__':
     main()

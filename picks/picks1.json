@@ -1,1 +1,256 @@
-{"Cole": [{"pick": "away", "id": "400935363", "spread": "OSU -40.5"}, {"pick": "home", "id": "400937472", "spread": "FSU -12.0"}, {"pick": "away", "id": "400937474", "spread": "LOU -44.0"}, {"pick": "home", "id": "400933864", "spread": "ARK -2.5"}, {"pick": "away", "id": "400933870", "spread": "TENN -28.0"}, {"pick": "away", "id": "400934514", "spread": "WVU -21.5"}, {"pick": "home", "id": "400934518", "spread": "HOU -6.0"}, {"pick": "away", "id": "400934561", "spread": "TULN -2.5"}, {"pick": "away", "id": "400937473", "spread": "GT -9.5"}, {"pick": "home", "id": "400941807", "spread": "TLSA -11.0"}, {"pick": "away", "id": "400937477", "spread": "VT -28.0"}, {"pick": "home", "id": "400944841", "spread": "USA -4.0"}, {"pick": "home", "id": "400944902", "spread": "EMU -2.5"}, {"pick": "home", "id": "400935361", "spread": "MD -4.0"}, {"pick": "away", "id": "400933871", "spread": "ALA -18.5"}, {"pick": "home", "id": "400937470", "spread": "CLEM -34.0"}, {"pick": "home", "id": "400935279", "spread": "USC -17.0"}, {"pick": "home", "id": "400934516", "spread": "OKST -13.0"}, {"pick": "home", "id": "400937475", "spread": "MIAMI -13.5"}, {"pick": "home", "id": "400935362", "spread": "NEB -12.5"}, {"pick": "home", "id": "400935359", "spread": "IND -24.0"}, {"pick": "away", "id": "400937478", "spread": "WAKE -5.0"}, {"pick": "away", "id": "400937471", "spread": "DUKE -2.0"}, {"pick": "away", "id": "400933869", "spread": "SC -9.5"}, {"pick": "away", "id": "400944901", "spread": "CMU -1.0"}], "test": [{"pick": "home", "id": "400935363", "spread": "OSU -40.5"}, {"pick": "home", "id": "400937472", "spread": "FSU -12.0"}, {"pick": "away", "id": "400937474", "spread": "LOU -44.0"}, {"pick": "away", "id": "400933864", "spread": "ARK -2.5"}, {"pick": "home", "id": "400933870", "spread": "TENN -28.0"}, {"pick": "away", "id": "400934514", "spread": "WVU -21.5"}, {"pick": "home", "id": "400934518", "spread": "HOU -6.0"}, {"pick": "away", "id": "400934561", "spread": "TULN -2.5"}, {"pick": "home", "id": "400937473", "spread": "GT -9.5"}, {"pick": "home", "id": "400941807", "spread": "TLSA -11.0"}, {"pick": "home", "id": "400937477", "spread": "VT -27.5"}, {"pick": "home", "id": "400944841", "spread": "USA -4.0"}, {"pick": "away", "id": "400944902", "spread": "EMU -2.5"}, {"pick": "away", "id": "400935361", "spread": "MD -4.0"}, {"pick": "home", "id": "400933871", "spread": "ALA -18.5"}, {"pick": "away", "id": "400937470", "spread": "CLEM -34.0"}, {"pick": "home", "id": "400935279", "spread": "USC -17.0"}, {"pick": "away", "id": "400934516", "spread": "OKST -13.0"}, {"pick": "away", "id": "400937475", "spread": "MIAMI -13.5"}, {"pick": "away", "id": "400935362", "spread": "NEB -12.5"}, {"pick": "away", "id": "400935359", "spread": "IND -24.0"}, {"pick": "home", "id": "400937478", "spread": "WAKE -5.0"}, {"pick": "away", "id": "400937471", "spread": "DUKE -2.5"}, {"pick": "home", "id": "400933869", "spread": "SC -9.5"}, {"pick": "away", "id": "400944901", "spread": "CMU -1.0"}]}
+{
+    "Cole": [
+        {
+            "id": "400935363",
+            "pick": "away",
+            "spread": "OSU -40.5"
+        },
+        {
+            "id": "400937472",
+            "pick": "home",
+            "spread": "FSU -12.0"
+        },
+        {
+            "id": "400937474",
+            "pick": "away",
+            "spread": "LOU -44.0"
+        },
+        {
+            "id": "400933864",
+            "pick": "home",
+            "spread": "ARK -2.5"
+        },
+        {
+            "id": "400933870",
+            "pick": "away",
+            "spread": "TENN -28.0"
+        },
+        {
+            "id": "400934514",
+            "pick": "away",
+            "spread": "WVU -21.5"
+        },
+        {
+            "id": "400934518",
+            "pick": "home",
+            "spread": "HOU -6.0"
+        },
+        {
+            "id": "400934561",
+            "pick": "away",
+            "spread": "TULN -2.5"
+        },
+        {
+            "id": "400937473",
+            "pick": "away",
+            "spread": "GT -9.5"
+        },
+        {
+            "id": "400941807",
+            "pick": "home",
+            "spread": "TLSA -11.0"
+        },
+        {
+            "id": "400937477",
+            "pick": "away",
+            "spread": "VT -28.0"
+        },
+        {
+            "id": "400944841",
+            "pick": "home",
+            "spread": "USA -4.0"
+        },
+        {
+            "id": "400944902",
+            "pick": "home",
+            "spread": "EMU -2.5"
+        },
+        {
+            "id": "400935361",
+            "pick": "home",
+            "spread": "MD -4.0"
+        },
+        {
+            "id": "400933871",
+            "pick": "away",
+            "spread": "ALA -18.5"
+        },
+        {
+            "id": "400937470",
+            "pick": "home",
+            "spread": "CLEM -34.0"
+        },
+        {
+            "id": "400935279",
+            "pick": "home",
+            "spread": "USC -17.0"
+        },
+        {
+            "id": "400934516",
+            "pick": "home",
+            "spread": "OKST -13.0"
+        },
+        {
+            "id": "400937475",
+            "pick": "home",
+            "spread": "MIAMI -13.5"
+        },
+        {
+            "id": "400935362",
+            "pick": "home",
+            "spread": "NEB -12.5"
+        },
+        {
+            "id": "400935359",
+            "pick": "home",
+            "spread": "IND -24.0"
+        },
+        {
+            "id": "400937478",
+            "pick": "away",
+            "spread": "WAKE -5.0"
+        },
+        {
+            "id": "400937471",
+            "pick": "away",
+            "spread": "DUKE -2.0"
+        },
+        {
+            "id": "400933869",
+            "pick": "away",
+            "spread": "SC -9.5"
+        },
+        {
+            "id": "400944901",
+            "pick": "away",
+            "spread": "CMU -1.0"
+        }
+    ],
+    "test": [
+        {
+            "id": "400935363",
+            "pick": "home",
+            "spread": "OSU -40.5"
+        },
+        {
+            "id": "400937472",
+            "pick": "home",
+            "spread": "FSU -12.0"
+        },
+        {
+            "id": "400937474",
+            "pick": "away",
+            "spread": "LOU -44.0"
+        },
+        {
+            "id": "400933864",
+            "pick": "away",
+            "spread": "ARK -2.5"
+        },
+        {
+            "id": "400933870",
+            "pick": "home",
+            "spread": "TENN -28.0"
+        },
+        {
+            "id": "400934514",
+            "pick": "away",
+            "spread": "WVU -21.5"
+        },
+        {
+            "id": "400934518",
+            "pick": "home",
+            "spread": "HOU -6.0"
+        },
+        {
+            "id": "400934561",
+            "pick": "away",
+            "spread": "TULN -2.5"
+        },
+        {
+            "id": "400937473",
+            "pick": "home",
+            "spread": "GT -9.5"
+        },
+        {
+            "id": "400941807",
+            "pick": "home",
+            "spread": "TLSA -11.0"
+        },
+        {
+            "id": "400937477",
+            "pick": "home",
+            "spread": "VT -27.5"
+        },
+        {
+            "id": "400944841",
+            "pick": "home",
+            "spread": "USA -4.0"
+        },
+        {
+            "id": "400944902",
+            "pick": "away",
+            "spread": "EMU -2.5"
+        },
+        {
+            "id": "400935361",
+            "pick": "away",
+            "spread": "MD -4.0"
+        },
+        {
+            "id": "400933871",
+            "pick": "home",
+            "spread": "ALA -18.5"
+        },
+        {
+            "id": "400937470",
+            "pick": "away",
+            "spread": "CLEM -34.0"
+        },
+        {
+            "id": "400935279",
+            "pick": "home",
+            "spread": "USC -17.0"
+        },
+        {
+            "id": "400934516",
+            "pick": "away",
+            "spread": "OKST -13.0"
+        },
+        {
+            "id": "400937475",
+            "pick": "away",
+            "spread": "MIAMI -13.5"
+        },
+        {
+            "id": "400935362",
+            "pick": "away",
+            "spread": "NEB -12.5"
+        },
+        {
+            "id": "400935359",
+            "pick": "away",
+            "spread": "IND -24.0"
+        },
+        {
+            "id": "400937478",
+            "pick": "home",
+            "spread": "WAKE -5.0"
+        },
+        {
+            "id": "400937471",
+            "pick": "away",
+            "spread": "DUKE -2.5"
+        },
+        {
+            "id": "400933869",
+            "pick": "home",
+            "spread": "SC -9.5"
+        },
+        {
+            "id": "400944901",
+            "pick": "away",
+            "spread": "CMU -1.0"
+        }
+    ]
+}
