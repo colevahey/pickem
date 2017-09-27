@@ -2,8 +2,9 @@ import urllib.request
 import json
 from time import sleep
 import login
+import whichweek
 
-rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/date/20170923")
+rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/date/" + whichweek.getweek()["last"][1])
 
 data = json.loads(rawhtml.read().decode("utf-8"))
 
@@ -12,17 +13,15 @@ userdata = json.loads(users.read())
 
 def checker(user):
 
-    weeknumber = 1
-
     try:
-        userpicks = open('./picks/picks' + str(weeknumber) + '.json', 'r')
+        userpicks = open('./picks/picks' + whichweek.getweek()["last"][0] + '.json', 'r')
         try:
             userpicksdata = json.loads(userpicks.read())[user]
         except KeyError:
             print("User " + user + " was either just added or has not made any picks for this week")
             exit()
     except FileNotFoundError:
-        print("You have no picks for week " + str(weeknumber))
+        print("You have no picks for week " + whichweek.getweek()["last"][0])
         exit()
 
     wins = 0
@@ -32,12 +31,6 @@ def checker(user):
 
     for gameselection in userpicksdata:
         for game in data["games"]:
-
-            #testing
-            #CHANGE THIS AFTER SATURDAY
-            #game["scores"]["home"] = "28"
-            #game["scores"]["away"] = "21"
-            #game["status"]["type"] = "STATUS_FINAL"
 
             #If the games are the same
             if gameselection["id"] == game["id"]:
@@ -93,6 +86,11 @@ def checker(user):
                     print("This game is in progress\n")
 
     print("Your record this week was " + str(wins) + "-" + str(losses))
+    userdata[user]["wins"] += wins
+    userdata[user]["losses"] += losses
+
+    users = open('users.json','w')
+    users.write(json.dump(userdata))
 
 
 checker(login.login())

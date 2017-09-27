@@ -3,15 +3,5 @@
         "losses": 0,
         "password": "abd37534c7d9a2efb9465de931cd7055ffdb8879563ae98078d6d6d5",
         "wins": 0
-    },
-    "test": {
-        "losses": 0,
-        "password": "90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809",
-        "wins": 0
-    },
-    "user3": {
-        "losses": 0,
-        "password": "a5059f47f9ab9fbd1e21ef9e0ea61c329b70e252a5dca286ec290ac1",
-        "wins": 0
     }
 }
