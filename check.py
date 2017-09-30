@@ -3,6 +3,7 @@ import json
 from time import sleep
 import login
 import whichweek
+from datetime import date
 
 rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/date/" + whichweek.getweek()["last"][1])
 
@@ -86,11 +87,19 @@ def checker(user):
                     print("This game is in progress\n")
 
     print("Your record this week was " + str(wins) + "-" + str(losses))
-    userdata[user]["wins"] += wins
-    userdata[user]["losses"] += losses
+    if date.today().weekday() != 5:
+        try:
+            week = userdata[user]["week" + whichweek.getweek()["last"][0]]
+            print("Your record was already updated for this week.")
+        except KeyError:
+            userdata[user]["week" + whichweek.getweek()["last"][0]] = True
+            userdata[user]["wins"] += wins
+            userdata[user]["losses"] += losses
+    else:
+        print("You cannot update your record on Saturday when some games may still be in progress.")
 
     users = open('users.json','w')
-    users.write(json.dump(userdata))
+    users.write(json.dumps(userdata))
 
 
 checker(login.login())
