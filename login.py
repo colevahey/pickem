@@ -1,5 +1,4 @@
 import json
-from time import sleep
 import hashlib
 import adduser
 
@@ -16,10 +15,10 @@ def login():
 
     try:
         if userdata[uname]["password"] == hashpassword:
-            print("Welcome back " + uname)
+            print("\033[H\033[2JWelcome back " + uname)
             print("Your current record is " + str(userdata[uname]["wins"]) + "-" + str(userdata[uname]["losses"]))
             print()
-            sleep(1)
+            input("Press enter to continue")
             return uname
         else:
             print("That password is incorrect")
