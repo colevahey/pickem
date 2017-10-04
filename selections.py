@@ -54,6 +54,7 @@ def selections(user):
         print(userselections)
         userpicks.write(json.dumps(userpicksdata))
     else:
-        print("Something is wrong...")
+        print("The odds for the games have not come out yet.")
+        userpicks.write("{}")
 
 selections(login.login())

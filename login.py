@@ -7,7 +7,7 @@ users = open('users.json', 'r')
 userdata = json.loads(users.read())
 
 def login():
-    uname = input("Username?\n>> ")
+    uname = input("\033[H\033[2JUsername?\n>> ")
     password = input("Password?\n>> \033[8m")
     print("\033[0m")
 
@@ -19,7 +19,7 @@ def login():
             print("Welcome back " + uname)
             print("Your current record is " + str(userdata[uname]["wins"]) + "-" + str(userdata[uname]["losses"]))
             print()
-            sleep(3)
+            sleep(1)
             return uname
         else:
             print("That password is incorrect")

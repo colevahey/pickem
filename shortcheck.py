@@ -1,6 +1,5 @@
 import urllib.request
 import json
-from time import sleep
 import login
 import whichweek
 from datetime import date
@@ -13,9 +12,6 @@ users = open('users.json', 'r')
 userdata = json.loads(users.read())
 
 def checker(user):
-
-    sleep(2)
-    print("\033[H\033[2J")
 
     try:
         userpicks = open('./picks/picks' + whichweek.getweek()["last"][0] + '.json', 'r')
@@ -30,8 +26,6 @@ def checker(user):
 
     wins = 0
     losses = 0
-    awayrank = ""
-    homerank = ""
 
     for gameselection in userpicksdata:
         for game in data["games"]:
@@ -44,17 +38,8 @@ def checker(user):
                 if int(game["homeTeam"]["rank"]) < 26:
                     homerank = str(game["homeTeam"]["rank"]) + " "
 
-                print(awayrank + game["awayTeam"]["displayName"] + " at " + homerank + game["homeTeam"]["displayName"])
-                awayrank = ""
-                homerank = ""
-                print(gameselection["spread"])
-                
                 #If the game is actually over
                 if game["status"]["type"] == "STATUS_FINAL":
-
-                    correct = False
-                    
-                    print("Final score:     " + game["homeTeam"]["abbreviation"], str(float(game["scores"]["home"])) + " - " + str(float(game["scores"]["away"])), game["awayTeam"]["abbreviation"])
 
                     #If the spread is tilted towards the home team
                     if gameselection["spread"].startswith(game["homeTeam"]["abbreviation"]):
@@ -65,48 +50,20 @@ def checker(user):
                         notfavored = "home"
 
                     #If the favored team's score minus the spread is still better than the losing team
-                    adjustedscore = float(game["scores"][favored]) + float(gameselection["spread"][len(game[favored + "Team"]["abbreviation"])+1:])
-
-                    if adjustedscore >= float(game["scores"][notfavored]):
+                    if float(game["scores"][favored]) + float(gameselection["spread"][len(game[favored + "Team"]["abbreviation"])+1:]) >= float(game["scores"][notfavored]):
 
                         #If your pick (home or away) matches the favored team that covered the spread
                         if gameselection["pick"] == favored:
-                            correct = True
                             wins += 1
                         else:
-                            correct = False
                             losses += 1
                     else:
-
+                        
                         #If your pick (home or away) matches the favored team that did not cover the spread
                         if gameselection["pick"] == favored:
-                            correct = False
                             losses += 1
                         else:
-                            correct = True
                             wins += 1
-                    
-                    if favored == "home":
-                        print("Adjusted score:  " + game["homeTeam"]["abbreviation"], str(adjustedscore) + " - " + str(float(game["scores"]["away"])), game["awayTeam"]["abbreviation"])
-                    else:    
-                        print("Adjusted score:  " + game["homeTeam"]["abbreviation"], str(float(game["scores"]["home"])) + " - " + str(adjustedscore), game["awayTeam"]["abbreviation"])
-
-                    if correct:
-                        print("\nYou got this game correct\n")
-                    else:
-                        print("\nYou got this game incorrect\n")
-
-                elif game["status"]["type"] == "STATUS_SCHEDULED":
-                    print("This game has not been played yet\n")
-                    
-                elif game["status"]["type"] == "STATUS_IN_PROGRESS":
-                    print("This game is in progress\n")
-
-                else:
-                    print("This game is in an unrecognized state.")
-
-                input("Press enter to continue")
-                print("\033[H\033[2J")
 
     print("Your record this week was " + str(wins) + "-" + str(losses))
     if date.today().weekday() != 5:
