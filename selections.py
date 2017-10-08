@@ -35,7 +35,7 @@ def selections(user):
         print(userselections)
         userpicks.write(json.dumps(userpicksdata))
     else:
-        print("The odds for the games have not come out yet.")
+        print("Selections aborted")
         userpicks.write("{}")
 
 def makeselections(game):
@@ -68,5 +68,8 @@ def makeselections(game):
             print("That pick is invalid.")
             input("Press enter to continue")
             return False
+    else:
+        print("The odds for the games have not come out for this week.")
+        exit()
 
 selections(login.login())
