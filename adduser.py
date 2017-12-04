@@ -6,7 +6,7 @@ def main():
     password = input("New Password?\n>> \033[8m")
     print("\033[0m")
 
-    users = open('users.json', 'r')
+    users = open('./users.json', 'r')
     userdata = json.loads(users.read())
 
     hash_object = hashlib.sha224(password.encode())

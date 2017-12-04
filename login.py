@@ -2,7 +2,7 @@ import json
 import hashlib
 import adduser
 
-users = open('users.json', 'r')
+users = open('./users.json', 'r')
 userdata = json.loads(users.read())
 
 def login():

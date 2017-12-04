@@ -9,7 +9,7 @@ rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/da
 
 data = json.loads(rawhtml.read().decode("utf-8"))
 
-users = open('users.json', 'r')
+users = open('./users.json', 'r')
 userdata = json.loads(users.read())
 
 def checker(user):
@@ -99,11 +99,12 @@ def checker(user):
                 elif game["status"]["type"] == "STATUS_SCHEDULED":
                     print("This game has not been played yet\n")
                     
-                elif game["status"]["type"] == "STATUS_IN_PROGRESS":
+                elif game["status"]["type"] == "STATUS_IN_PROGRESS" or game["status"]["type"] == "STATUS_HALFTIME":
                     print("This game is in progress\n")
+                    print("The current score is\n" + game["awayTeam"]["abbreviation"], game["scores"]["away"], "-", game["scores"]["home"], game["homeTeam"]["abbreviation"] + "\n")
 
                 else:
-                    print("This game is in an unrecognized state.")
+                    print("This game is in an unrecognized state.\n")
 
                 input("Press enter to continue")
                 print("\033[H\033[2J")
@@ -123,5 +124,6 @@ def checker(user):
     users = open('users.json','w')
     users.write(json.dumps(userdata))
     print("Your overall record is " + str(userdata[user]["wins"]) + "-" + str(userdata[user]["losses"]))
+    print()
 
 checker(login.login())
