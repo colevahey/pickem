@@ -3,17 +3,34 @@ import calendar
 import json
 
 def saturdaysfromcalendar():
+    today = date.today().day
     calendar.setfirstweekday(calendar.SATURDAY)
-
     saturdaysfromcal = []
-
+    lastsat = 0
+    nextsat = 0
     for week in calendar.monthcalendar(date.today().year,date.today().month):
         if week[0] != 0:
             saturdaysfromcal.append(week[0])
-
-    print(saturdaysfromcal)
-
-
+    for day in saturdaysfromcal:
+        if day != 0:
+            if day + 7 < today or day - 7 > today:
+                pass
+            else:
+                if today - day >= 0:
+                    lastsat = day
+                else:
+                    nextsat = day
+    if lastsat == 0:
+        if date.today().month != 1:
+            lastsat = calendar.monthcalendar(date.today().year, date.today().month-1)[-1][0]
+        else:
+            lastsat = calendar.monthcalendar(date.today().year-1,12)[-1][0]
+    if nextsat == 0:
+        if date.today().month != 12:
+            nextsat = calendar.monthcalendar(date.today().year, date.today().month+1)[1][0]
+        else:
+            nextsat = calendar.monthcalendar(date.today().year+1, 1)[1][0]
+            
 def getweek():
 
     saturdays = json.load(open('saturdays.json','r'))
@@ -39,7 +56,6 @@ def getweek():
         nextsaturday = str(nextsaturday).replace("-","")
         lastsaturday = str(lastsaturday).replace("-","")
     
-
     return {"next":[inversesaturdays[nextsaturday],nextsaturday],"last":[inversesaturdays[lastsaturday],lastsaturday]}
 
 if __name__ == '__main__':
