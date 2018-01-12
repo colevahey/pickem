@@ -1,8 +1,9 @@
-function login(){
-  uname = prompt("What is your username?")
-  if (uname in {}){
-    console.log("User found")
-  } else {
-    alert("User not found")
-  }
+// Get the modal
+let modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+		if (event.target == modal) {
+				modal.style.display = "none";
+		}
 }
