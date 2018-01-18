@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<head>
+  <link rel="shortcut icon" href="logo.png"/>
+  <title>CFB Pick'em</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="site.js"></script>
+</head>
+<body>
+  <div id="navbar">
+    <a id="maintitle">College Football Pick'em</a>
+
+    <!-- Button to open the modal login form -->
+    <button id="login" onclick="document.getElementById('id01').style.display='block';setgames(jsondata)">Login</button>
+
+  </div>
+
+  <!-- The Modal -->
+	<div id="id01" class="modal">
+		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="" method="get">
+      <div class="container">
+        <label><b>Username</b></label>
+        <input id="username" type="text" placeholder="Enter Username" name="uname" required>
+
+        <label><b>Password</b></label>
+        <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit" onclick="login()">Login</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtn">Cancel</button>
+      </div>
+
+    </form>
+  </div>
+  <table id="gamestable">
+    <tr>
+      <th>Home Team</th>
+      <th>Spread</th>
+      <th>Away Team</th>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+    <tr class="games">
+      <td class="home">Home team</td>
+      <td class="versus">@</td>
+      <td class="away">Away team</td>
+    </tr>
+  </table>
+</body>

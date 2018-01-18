@@ -1,39 +1,70 @@
 function login(){
+  // For future use in a login page... For now we will leave
+  // it here
+
   uname = document.getElementById("username").value
   pword = document.getElementById("password").value
   console.log(uname, pword)
 }
 
-function getweek(){
-  let url = "https://cfb-scoreboard-api.herokuapp.com/v1/date/20171011"
-  return url
-}
-
 function setgames(jsondata){
-  awayTeams = document.getElementsByClassName("away")
-  spreads = document.getElementsByClassName("versus")
-  homeTeams = document.getElementsByClassName("home")
-  for (i=0;i<spreads.length;i++){
+
+  for (i=0;i<jsondata.games.length;i++){
     game = jsondata.games[i]
 
-    homeTeams[i].selected = false
-    homeTeams[i].innerHTML = game.homeTeam.displayName
-    let newhomeimage = document.createElement("img");
-    newhomeimage.src = game.homeTeam.logoUrl
-    newhomeimage.height = "100"
-    homeTeams[i].appendChild(newhomeimage)
+    let newgame = document.createElement("tr")
+    let awayteam = document.createElement("td")
+    let hometeam = document.createElement("td")
+    let spread = document.createElement("td")
 
-    if (game.odds.spread != "N/A") {
-      spreads[i].innerHTML = game.odds.spread 
+    hometeam.className = "home"
+
+    // FIX THIS
+    hometeam.onclick = function(){select('home'+i)}
+
+    hometeam.selected = false
+    if (game.homeTeam.rank < 99) {
+      hometeam.innerHTML = "#" + game.homeTeam.rank + " "
     } else {
-      spreads[i].innerHTML = game.scores.home + "  -  " + game.scores.away
+      hometeam.innerHTML = ""
+    }
+    hometeam.innerHTML += game.homeTeam.displayName
+    let homeimage = document.createElement("img")
+    homeimage.src = game.homeTeam.logoUrl
+    homeimage.height = "100"
+    hometeam.appendChild(homeimage)
+
+    spread.className = "versus"
+    if (game.odds.spread != "N/A") {
+      spread.innerHTML = game.odds.spread 
+    } else {
+      spread.innerHTML = game.scores.home + "  -  " + game.scores.away
     }
 
-    homeTeams[i].selected = false
-    awayTeams[i].innerHTML = game.awayTeam.displayName 
-    let newawayimage = document.createElement("img");
-    newawayimage.src = game.awayTeam.logoUrl
-    newawayimage.height = "100"
-    awayTeams[i].appendChild(newawayimage)
+    awayteam.className = "away"
+
+    // FIX THIS
+    awayteam.onclick = function(){select("away"+i)}
+
+    awayteam.selected = false
+    if (game.awayTeam.rank < 99) {
+      awayteam.innerHTML = "#" + game.awayTeam.rank + " "
+    } else {
+      awayteam.innerHTML = ""
+    }
+    awayteam.innerHTML += game.awayTeam.displayName 
+    let awayimage = document.createElement("img")
+    awayimage.src = game.awayTeam.logoUrl
+    awayimage.height = "100"
+    awayteam.appendChild(awayimage)
+
+    newgame.appendChild(hometeam)
+    newgame.appendChild(spread)
+    newgame.appendChild(awayteam)
+    document.getElementById("gamestable").appendChild(newgame)
   }
+}
+
+function select(teamnum){
+  console.log("selecting", teamnum)  
 }
