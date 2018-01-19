@@ -7,9 +7,19 @@ function login(){
   console.log("Username:",uname,"Password:",pword)
 }
 
-function setgames(jsondata){
-  for (let i=0;i<jsondata.games.length;i++){
-    game = jsondata.games[i]
+function getdate(){
+  gamedate = "20171028"
+  return gamedate 
+}
+
+function fetchdata(date){
+  fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date).then(function(response){response.json().then(function(data){setgames(data)})})
+}
+
+function setgames(gamedata){
+
+  for (let i=0;i<gamedata.events.length;i++){
+    game = gamedata.events[i].competitions[0]
 
     let newgame = document.createElement("tr")
     let awayteam = document.createElement("td")
@@ -21,45 +31,46 @@ function setgames(jsondata){
     hometeam.onclick = function(){select(["home",i])}
     hometeam.onmouseover = function(){if (hometeam.selected == false){hometeam.style = "background-color:#707070"}}
     hometeam.onmouseout = function(){if (hometeam.selected == false){hometeam.style = "background-color:grey"}}
-    if (game.homeTeam.rank < 99) {
-      hometeam.innerHTML = "#" + game.homeTeam.rank + " "
+    if (game.competitors[0].curatedRank.current < 99) {
+      hometeam.innerHTML = "#" + game.competitors[0].curatedRank.current + " "
     } else {
       hometeam.innerHTML = ""
     }
-    hometeam.innerHTML += game.homeTeam.displayName
+    hometeam.innerHTML += game.competitors[0].team.displayName
     let homeclubhouse = document.createElement("a")
-    homeclubhouse.href = "http://www.espn.com/college-football/team/_/id/"+game.homeTeam.id
+    homeclubhouse.href = game.competitors[0].team.links[0].href
     homeclubhouse.target = "_blank"
     let homeimage = document.createElement("img")
-    homeimage.src = game.homeTeam.logoUrl
+    homeimage.src = game.competitors[0].team.logo
     homeimage.height = "100"
     homeimage.style = "float:left;"
     homeclubhouse.appendChild(homeimage)
     hometeam.appendChild(homeclubhouse)
 
     spread.className = "versus"
-    if (game.odds.spread != "N/A") {
+    spread.innerHTML = "@"
+    /*if (game.odds.spread != "N/A") {
       spread.innerHTML = game.odds.spread 
     } else {
       spread.innerHTML = game.scores.home + "  -  " + game.scores.away
-    }
+    }*/
 
     awayteam.className = "away"
     awayteam.selected = false
     awayteam.onclick = function(){select(["away",i])}
     awayteam.onmouseover = function(){if (awayteam.selected == false){awayteam.style = "background-color:#707070"}}
     awayteam.onmouseout = function(){if (awayteam.selected == false){awayteam.style = "background-color:grey"}}
-    if (game.awayTeam.rank < 99) {
-      awayteam.innerHTML = "#" + game.awayTeam.rank + " "
+    if (game.competitors[1].curatedRank.current < 99) {
+      awayteam.innerHTML = "#" + game.competitors[1].curatedRank.current + " "
     } else {
       awayteam.innerHTML = ""
     }
-    awayteam.innerHTML += game.awayTeam.displayName 
+    awayteam.innerHTML += game.competitors[1].team.displayName
     let awayclubhouse = document.createElement("a")
-    awayclubhouse.href = "http://www.espn.com/college-football/team/_/id/"+game.awayTeam.id
+    awayclubhouse.href = game.competitors[1].team.links[0].href
     awayclubhouse.target = "_blank"
     let awayimage = document.createElement("img")
-    awayimage.src = game.awayTeam.logoUrl
+    awayimage.src = game.competitors[1].team.logo
     awayimage.height = "100"
     awayimage.style = "float:right;"
     awayclubhouse.appendChild(awayimage)
@@ -97,3 +108,4 @@ function select(teamnum){
     }
   }
 }
+
