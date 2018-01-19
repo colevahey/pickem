@@ -19,58 +19,60 @@ function fetchdata(date){
 function setgames(gamedata){
 
   for (let i=0;i<gamedata.events.length;i++){
-    game = gamedata.events[i].competitions[0]
+    let game = gamedata.events[i].competitions[0]
+    let homedata = game.competitors[0]
+    let awaydata = game.competitors[1]
 
     let newgame = document.createElement("tr")
     let awayteam = document.createElement("td")
     let hometeam = document.createElement("td")
     let spread = document.createElement("td")
 
+
     hometeam.className = "home"
     hometeam.selected = false
     hometeam.onclick = function(){select(["home",i])}
     hometeam.onmouseover = function(){if (hometeam.selected == false){hometeam.style = "background-color:#707070"}}
     hometeam.onmouseout = function(){if (hometeam.selected == false){hometeam.style = "background-color:grey"}}
-    if (game.competitors[0].curatedRank.current < 99) {
-      hometeam.innerHTML = "#" + game.competitors[0].curatedRank.current + " "
+    if (homedata.curatedRank.current < 99) {
+      hometeam.innerHTML = "#" + homedata.curatedRank.current + " "
     } else {
       hometeam.innerHTML = ""
     }
-    hometeam.innerHTML += game.competitors[0].team.displayName
+    hometeam.innerHTML += homedata.team.displayName
     let homeclubhouse = document.createElement("a")
-    homeclubhouse.href = game.competitors[0].team.links[0].href
+    homeclubhouse.href = homedata.team.links[0].href
     homeclubhouse.target = "_blank"
     let homeimage = document.createElement("img")
-    homeimage.src = game.competitors[0].team.logo
+    homeimage.src = homedata.team.logo
     homeimage.height = "100"
     homeimage.style = "float:left;"
     homeclubhouse.appendChild(homeimage)
     hometeam.appendChild(homeclubhouse)
 
     spread.className = "versus"
-    spread.innerHTML = "@"
-    /*if (game.odds.spread != "N/A") {
+    if (game.status.type.completed != true) {
       spread.innerHTML = game.odds.spread 
     } else {
-      spread.innerHTML = game.scores.home + "  -  " + game.scores.away
-    }*/
+      spread.innerHTML = homedata.score + "  -  " + awaydata.score
+    }
 
     awayteam.className = "away"
     awayteam.selected = false
     awayteam.onclick = function(){select(["away",i])}
     awayteam.onmouseover = function(){if (awayteam.selected == false){awayteam.style = "background-color:#707070"}}
     awayteam.onmouseout = function(){if (awayteam.selected == false){awayteam.style = "background-color:grey"}}
-    if (game.competitors[1].curatedRank.current < 99) {
-      awayteam.innerHTML = "#" + game.competitors[1].curatedRank.current + " "
+    if (awaydata.curatedRank.current < 99) {
+      awayteam.innerHTML = "#" + awaydata.curatedRank.current + " "
     } else {
       awayteam.innerHTML = ""
     }
-    awayteam.innerHTML += game.competitors[1].team.displayName
+    awayteam.innerHTML += awaydata.team.displayName
     let awayclubhouse = document.createElement("a")
-    awayclubhouse.href = game.competitors[1].team.links[0].href
+    awayclubhouse.href = awaydata.team.links[0].href
     awayclubhouse.target = "_blank"
     let awayimage = document.createElement("img")
-    awayimage.src = game.competitors[1].team.logo
+    awayimage.src = awaydata.team.logo
     awayimage.height = "100"
     awayimage.style = "float:right;"
     awayclubhouse.appendChild(awayimage)
