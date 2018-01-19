@@ -123,14 +123,15 @@ th, td{
   color: white;
 }
 
-td:hover{
-	background-color: #707070;
-}
-
 .versus {
   width: 85px;
 }
 
 .versus:hover{
   background-color: grey;
+}
+
+footer {
+  color: white;
+  text-align: center;
 }

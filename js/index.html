@@ -20,19 +20,17 @@
 		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
     <!-- Modal Content -->
-    <form class="modal-content animate" action="" method="get">
-      <div class="container">
-        <label><b>Username</b></label>
-        <input id="username" type="text" placeholder="Enter Username" name="uname" required>
+    <div class="modal-content animate">
+      <label><b>Username</b></label>
+      <input id="username" type="text" placeholder="Enter Username" name="uname" required>
 
-        <label><b>Password</b></label>
-        <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+      <label><b>Password</b></label>
+      <input id="password" type="password" placeholder="Enter Password" name="psw" required>
 
-        <button type="submit" onclick="login()">Login</button>
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtn">Cancel</button>
-      </div>
+      <button type="submit" onclick="login()">Login</button>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtn">Cancel</button>
+    </div>
 
-    </form>
   </div>
   <table id="gamestable">
     <tr>
@@ -41,4 +39,5 @@
       <th>Away Team</th>
     </tr>
   </table>
+  <footer>DISCLAIMER: This software is designed for entertainment purposes only</footer>
 </body>
