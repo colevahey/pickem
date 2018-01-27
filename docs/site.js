@@ -1,14 +1,15 @@
-function login(){
-  // Future use in a login page... For now we will leave
-  // it here
-
-  uname = document.getElementById("username").value
-  pword = document.getElementById("password").value
-  console.log("Username:",uname,"Password:",pword)
+function setuser(){
+  let urlParams = new URLSearchParams(window.location.search)
+  let username = urlParams.get('uname')
+  let key = urlParams.get('key')
+  if (key == '01011010010'){
+    user = document.createElement("p")
+  }
 }
 
 function getdate(){
-  gamedate = "20171028"
+  // Somehow get the date
+  gamedate = "20181020"
   return gamedate 
 }
 
@@ -30,13 +31,12 @@ function setgames(gamedata){
     let homeTeam = document.createElement("td")
     let spread = document.createElement("td")
 
-
     homeTeam.className = "home"
     homeTeam.selected = false
     homeTeam.onclick = function(){select(["home",i])}
     homeTeam.onmouseover = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:#707070"}}
     homeTeam.onmouseout = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:grey"}}
-    if (homedata.curatedRank.current < 99) {
+    if (homedata.curatedRank.current < 99 && homedata.curatedRank.current != 0) {
       homeTeam.innerHTML = "#" + homedata.curatedRank.current + " "
     } else {
       homeTeam.innerHTML = ""
@@ -54,7 +54,8 @@ function setgames(gamedata){
 
     spread.className = "versus"
     if (game.status.type.completed != true) {
-      spread.innerHTML = game.odds.spread 
+      //spread.innerHTML = game.odds.spread 
+      spread.innerHTML = "N/A"
     } else {
       spread.innerHTML = homedata.score + "  -  " + awaydata.score
     }
@@ -64,7 +65,7 @@ function setgames(gamedata){
     awayTeam.onclick = function(){select(["away",i])}
     awayTeam.onmouseover = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:#707070"}}
     awayTeam.onmouseout = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:grey"}}
-    if (awaydata.curatedRank.current < 99) {
+    if (awaydata.curatedRank.current < 99 && awaydata.curatedRank.current != 0) {
       awayTeam.innerHTML = "#" + awaydata.curatedRank.current + " "
     } else {
       awayTeam.innerHTML = ""

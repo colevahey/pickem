@@ -37,7 +37,7 @@ body {
     background-attachment: fixed;
     background-position: center;
     text-align: center;
-    font-family: Georgia;
+    font-family: Arial;
     height: 100vh;
 }
 /*--header--*/
@@ -47,9 +47,7 @@ body {
 .header-w3l h1 {
     font-size: 3.5em;
     color: #fff;
-    letter-spacing: 10px;
     font-weight: 300;
-    text-shadow: 4px 4px 8px #101010;
 }
 .header-w3l h1 span {
     color: #fb6906;
@@ -147,7 +145,7 @@ span.fa {
 }
 .sub-agile input[type="checkbox"]:checked+label span:first-child:before {
     content: "";
-    background: url(../images/tick.png)no-repeat;
+    background: url(../fonts/tick.png)no-repeat;
     position: absolute;
     left: 2px;
     top: 1px;
@@ -216,7 +214,7 @@ span.fa {
 @media(max-width: 1280px){
     .header-w3l h1 {
         font-size: 3.4em;
-        letter-spacing: 9px;
+        letter-spacing: 3px;
     }
     .sub-main-w3 {
         width: 34%;
@@ -239,7 +237,7 @@ span.fa {
 @media(max-width: 900px){
     .header-w3l h1 {
         font-size: 3em;
-        letter-spacing: 8px;
+        letter-spacing: 2px;
     }
     .sub-main-w3 h2 {
         font-size: 1.7em;
@@ -275,7 +273,7 @@ span.fa {
 }
 @media(max-width: 667px){
     .header-w3l h1 {
-        letter-spacing: 6px;
+        letter-spacing: 2px;
     }
     .pom-agile {
         padding: 10px 15px;
@@ -310,7 +308,7 @@ span.fa {
 @media(max-width: 480px){
     .header-w3l h1 {
         font-size: 2.3em;
-        letter-spacing: 5px;
+        letter-spacing: 1px;
     }
     .sub-main-w3 h2 {
         font-size: 1.5em;
@@ -328,7 +326,7 @@ span.fa {
 }
 @media(max-width: 414px){
     .header-w3l h1 {
-        letter-spacing: 3px;
+        letter-spacing: 1px;
     }
     .header-w3l {
         padding-top: 1.5em;
