@@ -4,12 +4,18 @@ function setuser(){
   let key = urlParams.get('key')
   if (key == '01011010010'){
     user = document.createElement("p")
+    user.id = "username"
+    user.innerHTML = username
+    user.style.color = "white"
+    user.style.float = "right"
+    navigationbar = document.getElementById("navbar")
+    navigationbar.appendChild(user)
   }
 }
 
 function getdate(){
   // Somehow get the date
-  gamedate = "20181020"
+  gamedate = "20171028"
   return gamedate 
 }
 
@@ -34,8 +40,8 @@ function setgames(gamedata){
     homeTeam.className = "home"
     homeTeam.selected = false
     homeTeam.onclick = function(){select(["home",i])}
-    homeTeam.onmouseover = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:#707070"}}
-    homeTeam.onmouseout = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:grey"}}
+    homeTeam.onmouseover = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:#707070"}; this.style.cursor = "pointer"}
+    homeTeam.onmouseout = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:grey"}; this.style.cursor = "default"}
     if (homedata.curatedRank.current < 99 && homedata.curatedRank.current != 0) {
       homeTeam.innerHTML = "#" + homedata.curatedRank.current + " "
     } else {
@@ -63,8 +69,8 @@ function setgames(gamedata){
     awayTeam.className = "away"
     awayTeam.selected = false
     awayTeam.onclick = function(){select(["away",i])}
-    awayTeam.onmouseover = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:#707070"}}
-    awayTeam.onmouseout = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:grey"}}
+    awayTeam.onmouseover = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:#707070"}; this.style.cursor = "pointer"}
+    awayTeam.onmouseout = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:grey"}; this.style.cursor = "default"}
     if (awaydata.curatedRank.current < 99 && awaydata.curatedRank.current != 0) {
       awayTeam.innerHTML = "#" + awaydata.curatedRank.current + " "
     } else {
@@ -116,21 +122,27 @@ function select(teamnum){
 
 function finalcheck() {
   let games = document.getElementsByClassName("game")
+  let totalselected = 0
   for (let i=0; i<games.length; i++) {
     let game = games[i]
     switch (game.cells[0].selected){
       case true:
         console.log("Game",i+1,"home selected")
+        totalselected += 1
         break
       case false:
         switch (game.cells[2].selected){
           case true:
             console.log("Game",i+1,"away selected")
+            totalselected += 1
             break
           case false:
             console.log("NO TEAM SELECTED GAME",i+1)
             break
         }
     }
+  }
+  if (totalselected == 25){
+    alert("ALL GAMES SELECTED... continue?...")
   }
 }

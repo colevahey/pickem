@@ -177,10 +177,10 @@ span.fa {
 .footer p {
     font-size: .9em;
     color: #fff;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 .footer p a {
-    color: #fb6906;
+    color: #000;
 	-webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
     -moz-transition: 0.5s all;
@@ -200,7 +200,7 @@ span.fa {
 /*--responsive--*/
 @media(max-width: 1440px){
     .footer {
-        margin-bottom: 40px;
+        margin-bottom: 80px;
     }
     .sub-main-w3 {
         margin: 100px auto;
@@ -283,7 +283,7 @@ span.fa {
         padding: 35px 40px;
     }
     .footer {
-        margin-bottom: 28px;
+        margin-bottom: 56px;
     }
 }
 @media(max-width: 600px){
