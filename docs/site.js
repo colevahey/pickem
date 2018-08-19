@@ -1,29 +1,50 @@
-function setuser(){
+let setuser = function(){
   let urlParams = new URLSearchParams(window.location.search)
-  let username = urlParams.get('uname')
-  let key = urlParams.get('key')
-  if (key == '01011010010'){
-    user = document.createElement("p")
-    user.id = "username"
-    user.innerHTML = username
-    user.style.color = "white"
-    user.style.float = "right"
-    navigationbar = document.getElementById("navbar")
-    navigationbar.appendChild(user)
+  let username = urlParams.get('uname').toUpperCase()
+  user = document.createElement("p")
+  user.id = "username"
+  user.innerHTML = username
+  user.style.color = "white"
+  user.style.float = "right"
+  navigationbar = document.getElementById("navbar")
+  navigationbar.appendChild(user)
+}
+
+let getdate = function(){
+  let gamedate = new Date()
+  let today = new Date()
+  gamedate.setDate(gamedate.getDate()+0.5)
+  gamedate.setDate(gamedate.getDate() + (6+(7-gamedate.getDay())) % 7)
+
+  year = gamedate.getYear()+1900
+
+  month = gamedate.getMonth()+1
+  switch(month>9){
+    case false:
+      month = ['0',month].join("")
   }
-}
 
-function getdate(){
-  // Somehow get the date
-  gamedate = "20171028"
-  return gamedate 
-}
+  day = gamedate.getDate()
+  switch(day>9){
+    case false:
+      day = ['0',day].join("")
+  }
 
-function fetchdata(date){
+  if (today < gamedate){
+    gamedate = "20180901"
+  } else {
+    gamedate = [year,month,day].join("")
+  }
+
+  return gamedate
+}
+getdate()
+
+let fetchdata = function(date){
   fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date).then(function(response){response.json().then(function(data){setgames(data)})})
 }
 
-function setgames(gamedata){
+let setgames = function(gamedata){
 
   for (let i=0;i<gamedata.events.length;i++){
     let game = gamedata.events[i].competitions[0]
@@ -94,7 +115,7 @@ function setgames(gamedata){
   }
 }
 
-function select(teamnum){
+let select = function(teamnum){
   homeTeams = document.getElementsByClassName("home")
   awayTeams = document.getElementsByClassName("away")
   if (teamnum[0] == "home") {
@@ -120,29 +141,38 @@ function select(teamnum){
   }
 }
 
-function finalcheck() {
+let finalcheck = function(){ 
   let games = document.getElementsByClassName("game")
   let totalselected = 0
+  let notselected = "" 
+  let selections = []
   for (let i=0; i<games.length; i++) {
     let game = games[i]
     switch (game.cells[0].selected){
       case true:
         console.log("Game",i+1,"home selected")
         totalselected += 1
+        selections.push("HOME")
         break
       case false:
         switch (game.cells[2].selected){
           case true:
             console.log("Game",i+1,"away selected")
             totalselected += 1
+            selections.push("AWAY")
             break
           case false:
             console.log("NO TEAM SELECTED GAME",i+1)
+            notselected += i+1+" "
             break
         }
     }
   }
-  if (totalselected == 25){
-    alert("ALL GAMES SELECTED... continue?...")
+  if (totalselected != 25){
+    alert("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notselected)
+  } else {
+    console.log(selections)
+    alert("Thank you for making your selections")
+    // ADD TO A DATABASE???
   }
 }
