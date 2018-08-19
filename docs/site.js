@@ -1,4 +1,4 @@
-let setuser = function(){
+const setuser = _ => {
   let urlParams = new URLSearchParams(window.location.search)
   let username = urlParams.get('uname').toUpperCase()
   user = document.createElement("p")
@@ -10,7 +10,7 @@ let setuser = function(){
   navigationbar.appendChild(user)
 }
 
-let getdate = function(){
+const getdate = _ => {
   let gamedate = new Date()
   let today = new Date()
   gamedate.setDate(gamedate.getDate()+0.5)
@@ -40,11 +40,11 @@ let getdate = function(){
 }
 getdate()
 
-let fetchdata = function(date){
+const fetchdata = date => {
   fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date).then(function(response){response.json().then(function(data){setgames(data)})})
 }
 
-let setgames = function(gamedata){
+const setgames = gamedata => {
 
   for (let i=0;i<gamedata.events.length;i++){
     let game = gamedata.events[i].competitions[0]
@@ -115,7 +115,7 @@ let setgames = function(gamedata){
   }
 }
 
-let select = function(teamnum){
+const select = teamnum => {
   homeTeams = document.getElementsByClassName("home")
   awayTeams = document.getElementsByClassName("away")
   if (teamnum[0] == "home") {
@@ -141,7 +141,7 @@ let select = function(teamnum){
   }
 }
 
-let finalcheck = function(){ 
+const finalcheck = _ => { 
   let games = document.getElementsByClassName("game")
   let totalselected = 0
   let notselected = "" 
@@ -173,6 +173,5 @@ let finalcheck = function(){
   } else {
     console.log(selections)
     alert("Thank you for making your selections")
-    // ADD TO A DATABASE???
   }
 }

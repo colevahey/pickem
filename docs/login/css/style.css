@@ -43,10 +43,11 @@ body {
 /*--header--*/
 .header-w3l {
     padding-top: 2em;
+    height: 10vh;
 }
-.header-w3l h1 {
-    font-size: 3.5em;
-    color: #fff;
+.header-w3l p {
+    font-size: 7em;
+    color: whitesmoke;
     font-weight: 300;
 }
 .header-w3l h1 span {
