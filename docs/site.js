@@ -1,12 +1,18 @@
 const setuser = _ => {
   let urlParams = new URLSearchParams(window.location.search)
-  let username = urlParams.get('uname').toUpperCase()
+  let username = ""
+  try {
+    username = urlParams.get('uname').toUpperCase()
+  }
+  catch(err) {
+    document.write("Error 001: No username specified")
+  }
   user = document.createElement("p")
   user.id = "username"
   user.innerHTML = username
   user.style.color = "white"
   user.style.float = "right"
-  navigationbar = document.getElementById("navbar")
+  navigationbar = document.querySelector("#navbar")
   navigationbar.appendChild(user)
 }
 
@@ -111,7 +117,7 @@ const setgames = gamedata => {
     newgame.appendChild(homeTeam)
     newgame.appendChild(spread)
     newgame.appendChild(awayTeam)
-    document.getElementById("gamestable").appendChild(newgame)
+    document.querySelector("#gamestable").appendChild(newgame)
   }
 }
 
@@ -145,21 +151,21 @@ const finalcheck = _ => {
   let games = document.getElementsByClassName("game")
   let totalselected = 0
   let notselected = "" 
-  let selections = []
+  let selections = {"Username":document.querySelector("#username").innerHTML,"Game Selections":{}}
   for (let i=0; i<games.length; i++) {
     let game = games[i]
     switch (game.cells[0].selected){
       case true:
         console.log("Game",i+1,"home selected")
         totalselected += 1
-        selections.push("HOME")
+        selections["Game Selections"]["Game " + i] = "HOME"
         break
       case false:
         switch (game.cells[2].selected){
           case true:
             console.log("Game",i+1,"away selected")
             totalselected += 1
-            selections.push("AWAY")
+            selections["Game Selections"]["Game " + i] = "AWAY"
             break
           case false:
             console.log("NO TEAM SELECTED GAME",i+1)
@@ -168,10 +174,21 @@ const finalcheck = _ => {
         }
     }
   }
+  console.log(selections)
   if (totalselected != 25){
     alert("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notselected)
   } else {
     console.log(selections)
     alert("Thank you for making your selections")
+    console.log(toString(selections))
+    download([JSON.stringify(selections)], 'selections.json', 'text/plain')
   }
+}
+
+const download = (content, fileName, contentType) => {
+    let a = document.createElement("a")
+    let file = new Blob(content, {type: contentType})
+    a.href = URL.createObjectURL(file)
+    a.download = fileName
+    a.click()
 }
