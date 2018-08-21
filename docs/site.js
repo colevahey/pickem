@@ -1,4 +1,4 @@
-const setuser = _ => {
+const setUser = _ => {
   let urlParams = new URLSearchParams(window.location.search)
   let username = ""
   try {
@@ -16,49 +16,49 @@ const setuser = _ => {
   navigationbar.appendChild(user)
 }
 
-const getdate = _ => {
-  let gamedate = new Date()
+const getDate = _ => {
+  let gameDate = new Date()
   let today = new Date()
-  gamedate.setDate(gamedate.getDate()+0.5)
-  gamedate.setDate(gamedate.getDate() + (6+(7-gamedate.getDay())) % 7)
+  gameDate.setDate(gameDate.getDate()+0.5)
+  gameDate.setDate(gameDate.getDate() + (6+(7-gameDate.getDay())) % 7)
 
-  year = gamedate.getYear()+1900
+  year = gameDate.getYear()+1900
 
-  month = gamedate.getMonth()+1
+  month = gameDate.getMonth()+1
   switch(month>9){
     case false:
       month = ['0',month].join("")
   }
 
-  day = gamedate.getDate()
+  day = gameDate.getDate()
   switch(day>9){
     case false:
       day = ['0',day].join("")
   }
 
-  if (today < gamedate){
-    gamedate = "20180901"
+  if (today < gameDate){
+    gameDate = "20180901"
   } else {
-    gamedate = [year,month,day].join("")
+    gameDate = [year,month,day].join("")
   }
 
-  return gamedate
+  return gameDate
 }
-getdate()
+getDate()
 
-const fetchdata = date => {
-  fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date).then(function(response){response.json().then(function(data){setgames(data)})})
+const fetchData = date => {
+  fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date).then(function(response){response.json().then(function(data){setGames(data)})})
 }
 
-const setgames = gamedata => {
+const setGames = gameData => {
 
-  for (let i=0;i<gamedata.events.length;i++){
-    let game = gamedata.events[i].competitions[0]
-    let homedata = game.competitors[0]
-    let awaydata = game.competitors[1]
+  for (let i=0;i<gameData.events.length;i++){
+    let game = gameData.events[i].competitions[0]
+    let homeData = game.competitors[0]
+    let awayData = game.competitors[1]
 
-    let newgame = document.createElement("tr")
-    newgame.className = "game"
+    let newGame = document.createElement("tr")
+    newGame.className = "game"
 
     let awayTeam = document.createElement("td")
     let homeTeam = document.createElement("td")
@@ -69,28 +69,28 @@ const setgames = gamedata => {
     homeTeam.onclick = function(){select(["home",i])}
     homeTeam.onmouseover = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:#707070"}; this.style.cursor = "pointer"}
     homeTeam.onmouseout = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:grey"}; this.style.cursor = "default"}
-    if (homedata.curatedRank.current < 99 && homedata.curatedRank.current != 0) {
-      homeTeam.innerHTML = "#" + homedata.curatedRank.current + " "
+    if (homeData.curatedRank.current < 99 && homeData.curatedRank.current != 0) {
+      homeTeam.innerHTML = "#" + homeData.curatedRank.current + " "
     } else {
       homeTeam.innerHTML = ""
     }
-    homeTeam.innerHTML += homedata.team.displayName
-    let homeclubhouse = document.createElement("a")
-    homeclubhouse.href = homedata.team.links[0].href
-    homeclubhouse.target = "_blank"
-    let homeimage = document.createElement("img")
-    homeimage.src = homedata.team.logo
-    homeimage.height = "100"
-    homeimage.style = "float:left;"
-    homeclubhouse.appendChild(homeimage)
-    homeTeam.appendChild(homeclubhouse)
+    homeTeam.innerHTML += homeData.team.displayName
+    let homeClubhouse = document.createElement("a")
+    homeClubhouse.href = homeData.team.links[0].href
+    homeClubhouse.target = "_blank"
+    let homeImage = document.createElement("img")
+    homeImage.src = homeData.team.logo
+    homeImage.height = "100"
+    homeImage.style = "float:left;"
+    homeClubhouse.appendChild(homeImage)
+    homeTeam.appendChild(homeClubhouse)
 
     spread.className = "versus"
     if (game.status.type.completed != true) {
       //spread.innerHTML = game.odds.spread 
       spread.innerHTML = "N/A"
     } else {
-      spread.innerHTML = homedata.score + "  -  " + awaydata.score
+      spread.innerHTML = homeData.score + "  -  " + awayData.score
     }
 
     awayTeam.className = "away"
@@ -98,26 +98,26 @@ const setgames = gamedata => {
     awayTeam.onclick = function(){select(["away",i])}
     awayTeam.onmouseover = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:#707070"}; this.style.cursor = "pointer"}
     awayTeam.onmouseout = function(){if (awayTeam.selected == false){awayTeam.style = "background-color:grey"}; this.style.cursor = "default"}
-    if (awaydata.curatedRank.current < 99 && awaydata.curatedRank.current != 0) {
-      awayTeam.innerHTML = "#" + awaydata.curatedRank.current + " "
+    if (awayData.curatedRank.current < 99 && awayData.curatedRank.current != 0) {
+      awayTeam.innerHTML = "#" + awayData.curatedRank.current + " "
     } else {
       awayTeam.innerHTML = ""
     }
-    awayTeam.innerHTML += awaydata.team.displayName
-    let awayclubhouse = document.createElement("a")
-    awayclubhouse.href = awaydata.team.links[0].href
-    awayclubhouse.target = "_blank"
-    let awayimage = document.createElement("img")
-    awayimage.src = awaydata.team.logo
-    awayimage.height = "100"
-    awayimage.style = "float:right;"
-    awayclubhouse.appendChild(awayimage)
-    awayTeam.appendChild(awayclubhouse)
+    awayTeam.innerHTML += awayData.team.displayName
+    let awayClubhouse = document.createElement("a")
+    awayClubhouse.href = awayData.team.links[0].href
+    awayClubhouse.target = "_blank"
+    let awayImage = document.createElement("img")
+    awayImage.src = awayData.team.logo
+    awayImage.height = "100"
+    awayImage.style = "float:right;"
+    awayClubhouse.appendChild(awayImage)
+    awayTeam.appendChild(awayClubhouse)
 
-    newgame.appendChild(homeTeam)
-    newgame.appendChild(spread)
-    newgame.appendChild(awayTeam)
-    document.querySelector("#gamestable").appendChild(newgame)
+    newGame.appendChild(homeTeam)
+    newGame.appendChild(spread)
+    newGame.appendChild(awayTeam)
+    document.querySelector("#gamestable").appendChild(newGame)
   }
 }
 
@@ -147,41 +147,40 @@ const select = teamnum => {
   }
 }
 
-const finalcheck = _ => { 
+const finalCheck = gameDate => { 
   let games = document.getElementsByClassName("game")
-  let totalselected = 0
-  let notselected = "" 
-  let selections = {"Username":document.querySelector("#username").innerHTML,"Game Selections":{}}
+  let totalSelected = 0
+  let notSelected = "" 
+  let selections = {"Username":document.querySelector("#username").innerHTML}
+  selections[gameDate] = {"GameSelections":{}}
   for (let i=0; i<games.length; i++) {
     let game = games[i]
     switch (game.cells[0].selected){
       case true:
         console.log("Game",i+1,"home selected")
-        totalselected += 1
-        selections["Game Selections"]["Game " + i] = "HOME"
+        totalSelected += 1
+        selections[gameDate]["GameSelections"]["Game" + i] = "HOME"
         break
       case false:
         switch (game.cells[2].selected){
           case true:
             console.log("Game",i+1,"away selected")
-            totalselected += 1
-            selections["Game Selections"]["Game " + i] = "AWAY"
+            totalSelected += 1
+            selections[gameDate]["GameSelections"]["Game" + i] = "AWAY"
             break
           case false:
             console.log("NO TEAM SELECTED GAME",i+1)
-            notselected += i+1+" "
+            notSelected += i+1+" "
             break
         }
     }
   }
   console.log(selections)
-  if (totalselected != 25){
-    alert("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notselected)
+  if (totalSelected != 25){
+    alert("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notSelected)
   } else {
-    console.log(selections)
-    alert("Thank you for making your selections")
-    console.log(toString(selections))
-    download([JSON.stringify(selections)], 'selections.json', 'text/plain')
+    alert("Thank you for making your selections.\nPlease Download the following file which will save your selections.\nMAKE SURE IT IS TITLED 'pickemSelections' AND NOTHING ELSE")
+    download([JSON.stringify(selections)], 'pickemSelections.json', 'application/json')
   }
 }
 
@@ -191,4 +190,20 @@ const download = (content, fileName, contentType) => {
     a.href = URL.createObjectURL(file)
     a.download = fileName
     a.click()
+}
+
+// Need to make this not asynchronous
+const inputPreviousData = _ => {
+  let fileInput = document.createElement('input')
+  fileInput.type = 'file'
+  fileInput.click()
+  let given = fileInput.files[0]
+  let reader = new FileReader()
+  reader.onloadend = function(evt){
+    if (evt.target.readyState = FileReader.DONE) {
+      console.log("PREVIOUS DATA:",evt.target.result)
+    }
+  }
+  let blob = given.slice(0,given.size)
+  reader.readAsBinaryString(blob)
 }
