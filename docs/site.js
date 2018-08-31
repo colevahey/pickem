@@ -85,14 +85,6 @@ const setGames = gameData => {
     homeClubhouse.appendChild(homeImage)
     homeTeam.appendChild(homeClubhouse)
 
-    spread.className = "versus"
-    if (game.status.type.completed != true) {
-      //spread.innerHTML = game.odds.spread 
-      spread.innerHTML = "N/A"
-    } else {
-      spread.innerHTML = homeData.score + "  -  " + awayData.score
-    }
-
     awayTeam.className = "away"
     awayTeam.selected = false
     awayTeam.onclick = function(){select(["away",i])}
@@ -114,10 +106,22 @@ const setGames = gameData => {
     awayClubhouse.appendChild(awayImage)
     awayTeam.appendChild(awayClubhouse)
 
+    spread.className = "versus"
+    if (game.status.type.completed != true) {
+      if (game.odds) {
+        spread.innerHTML = game.odds[0].details 
+      } else {
+        spread.innerHTML = "EVEN"
+      }
+    } else {
+      spread.innerHTML = homeData.score + "  -  " + awayData.score
+    }
+
     newGame.appendChild(homeTeam)
     newGame.appendChild(spread)
     newGame.appendChild(awayTeam)
     document.querySelector("#gamestable").appendChild(newGame)
+
   }
 }
 
@@ -152,21 +156,24 @@ const finalCheck = gameDate => {
   let totalSelected = 0
   let notSelected = "" 
   let selections = {"Username":document.querySelector("#username").innerHTML}
-  selections[gameDate] = {"GameSelections":{}}
+  selections[gameDate] = {}
   for (let i=0; i<games.length; i++) {
+    selections[gameDate]["Game"+i] = {}
     let game = games[i]
     switch (game.cells[0].selected){
       case true:
         console.log("Game",i+1,"home selected")
         totalSelected += 1
-        selections[gameDate]["GameSelections"]["Game" + i] = "HOME"
+        selections[gameDate]["Game" + i]["team"] = "HOME"
+        selections[gameDate]["Game" + i]["spread"] = game.querySelector(".versus").innerHTML
         break
       case false:
         switch (game.cells[2].selected){
           case true:
             console.log("Game",i+1,"away selected")
             totalSelected += 1
-            selections[gameDate]["GameSelections"]["Game" + i] = "AWAY"
+            selections[gameDate]["Game" + i]["team"] = "AWAY"
+            selections[gameDate]["Game" + i]["spread"] = game.querySelector(".versus").innerHTML
             break
           case false:
             console.log("NO TEAM SELECTED GAME",i+1)
@@ -179,31 +186,6 @@ const finalCheck = gameDate => {
   if (totalSelected != 25){
     alert("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notSelected)
   } else {
-    alert("Thank you for making your selections.\nPlease Download the following file which will save your selections.\nMAKE SURE IT IS TITLED 'pickemSelections' AND NOTHING ELSE")
-    download([JSON.stringify(selections)], 'pickemSelections.json', 'application/json')
+    alert("Thank you for making your selections")
   }
-}
-
-const download = (content, fileName, contentType) => {
-    let a = document.createElement("a")
-    let file = new Blob(content, {type: contentType})
-    a.href = URL.createObjectURL(file)
-    a.download = fileName
-    a.click()
-}
-
-// Need to make this not asynchronous
-const inputPreviousData = _ => {
-  let fileInput = document.createElement('input')
-  fileInput.type = 'file'
-  fileInput.click()
-  let given = fileInput.files[0]
-  let reader = new FileReader()
-  reader.onloadend = function(evt){
-    if (evt.target.readyState = FileReader.DONE) {
-      console.log("PREVIOUS DATA:",evt.target.result)
-    }
-  }
-  let blob = given.slice(0,given.size)
-  reader.readAsBinaryString(blob)
 }

@@ -4,7 +4,8 @@ from time import sleep
 import login
 import whichweek
 
-rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/date/" + whichweek.getweek()["next"][1])
+#rawhtml = urllib.request.urlopen("https://cfb-scoreboard-api.herokuapp.com/v1/date/" + whichweek.getweek()["next"][1])
+rawhtml = urllib.request.urlopen("http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates="+whichweek.getweek()["next"][1]
 
 data = json.loads(rawhtml.read().decode("utf-8"))
 
