@@ -36,11 +36,8 @@ const getDate = _ => {
       day = ['0',day].join("")
   }
 
-  if (today < gameDate){
-    gameDate = "20180901"
-  } else {
-    gameDate = [year,month,day].join("")
-  }
+  console.log(year, month, day)
+  gameDate = [year,month,day].join("")
 
   return gameDate
 }
