@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<head>
-  <link rel="shortcut icon" href="logo.png"/>
-  <title>CFB Pick'em</title>
-  <link rel="stylesheet" type="text/css" href="main.css">
-  <script type="text/javascript" src="site.js"></script>
-</head>
-<body onload="setUser(); fetchData(getDate())">
-  <div id="navbar">
-    <h1 id="maintitle">College Football Pick'em</h1>
-  </div>
-  <table id="gamestable">
-    <tr>
-      <th>Home Team</th>
-      <th>Spread</th>
-      <th>Away Team</th>
-    </tr>
-  </table>
-  <button id="button" onclick="finalCheck(getDate())">Continue</button>
+<html>
+  <head>
+    <title>Welcome</title>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      // TODO: Replace with your project's customized code snippet
+      var config = {
+        apiKey: "<API_KEY>",
+        authDomain: "<PROJECT_ID>.firebaseapp.com",
+        databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+        projectId: "<PROJECT_ID>",
+        storageBucket: "<BUCKET>.appspot.com",
+        messagingSenderId: "<SENDER_ID>",
+      };
+      firebase.initializeApp(config);
+    </script>
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
 
-  <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyDN3SR4DhA2sCbCHPtCOJ9-jYJ_fuSa6F4",
-      authDomain: "cfb-pickem-f8cfe.firebaseapp.com",
-      databaseURL: "https://cfb-pickem-f8cfe.firebaseio.com",
-      projectId: "cfb-pickem-f8cfe",
-      storageBucket: "cfb-pickem-f8cfe.appspot.com",
-      messagingSenderId: "378839295001"
-    }
-    firebase.initializeApp(config)
-  </script>
-</body>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-functions.js"></script>
+
+    <!-- Comment out (or don't include) services that you don't want to use -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-storage.js"></script> -->
+
+    <script>
+      var config = {
+        // ...
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__{LANGUAGE_CODE}.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth.css" />
+  </head>
+  <body>
+    <h1 id="test"></h1>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-const setUser = _ => {
+/*const setUser = _ => {
   let urlParams = new URLSearchParams(window.location.search)
   let username = ""
   try {
@@ -14,7 +14,7 @@ const setUser = _ => {
   user.style.float = "right"
   navigationbar = document.querySelector("#navbar")
   navigationbar.appendChild(user)
-}
+}*/
 
 const getDate = _ => {
   let gameDate = new Date()
