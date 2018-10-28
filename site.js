@@ -1,4 +1,4 @@
-/*const setUser = _ => {
+const setUser = _ => {
   let urlParams = new URLSearchParams(window.location.search)
   let username = ""
   try {
@@ -14,37 +14,37 @@
   user.style.float = "right"
   navigationbar = document.querySelector("#navbar")
   navigationbar.appendChild(user)
-}*/
+}
 
 const getDate = _ => {
   let gameDate = new Date()
   let today = new Date()
+
+  // Get the date of the next Saturday
   gameDate.setDate(gameDate.getDate()+0.5)
   gameDate.setDate(gameDate.getDate() + (6+(7-gameDate.getDay())) % 7)
 
   year = gameDate.getYear()+1900
-
   month = gameDate.getMonth()+1
-  switch(month>9){
-    case false:
-      month = ['0',month].join("")
+
+  if (month < 9) {
+    month = `0${month}`
   }
 
   day = gameDate.getDate()
-  switch(day>9){
-    case false:
-      day = ['0',day].join("")
+  if (day < 9){
+    day = `0${day}`
   }
 
-  //console.log(year, month, day)
-  gameDate = [year,month,day].join("")
+  gameDate = `${year}${month}${day}`
 
   return gameDate
 }
-getDate()
 
-const fetchData = date => {
-  fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date).then(function(response){response.json().then(function(data){setGames(data)})})
+const fetchData = async date => {
+  let response = await fetch('http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?calendartype=blacklist&dates='+date)
+  let data = await response.json()
+  setGames(data)
 }
 
 const setGames = gameData => {
@@ -63,9 +63,22 @@ const setGames = gameData => {
 
     homeTeam.className = "home"
     homeTeam.selected = false
-    homeTeam.onclick = function(){select(["home",i])}
-    homeTeam.onmouseover = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:#707070"}; this.style.cursor = "pointer"}
-    homeTeam.onmouseout = function(){if (homeTeam.selected == false){homeTeam.style = "background-color:grey"}; this.style.cursor = "default"}
+    //homeTeam.onclick = function(){select(["home",i])}
+    homeTeam.onclick = _ => select(["home",i])
+    
+    homeTeam.onmouseover = e => {
+      if (e.target.selected == false) {
+        e.target.style = "background-color:#707070"
+      }
+      e.target.style.cursor = "pointer"
+    }
+    homeTeam.onmouseout = e => {
+      if (e.target.selected == false){
+        e.target.style = "background-color:grey"
+      }
+      e.target.style.cursor = "default"
+    }
+
     if (homeData.curatedRank.current < 99 && homeData.curatedRank.current != 0) {
       homeTeam.innerHTML = "#" + homeData.curatedRank.current + " "
     } else {

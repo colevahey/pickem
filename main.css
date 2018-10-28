@@ -18,7 +18,7 @@ body {
 
 #maintitle {
 	float: left;
-	display: block;
+	display: inline-block;
   color: white;
 	text-align: center;
 	padding: 14px 16px;
@@ -39,9 +39,12 @@ body {
   margin-right: 1.5%;
 }
 
+#container {
+  text-align: center;
+}
+
 #gamestable {
-  margin: auto;
-  height: auto;
+  display: inline-block;
   text-align: center;
 	background-color: grey;
 	color: #ff2d2d;
@@ -54,8 +57,12 @@ th, td{
   color: white;
 }
 
+td{
+  width: 25rem;
+}
+
 .versus {
-  width: 85px;
+  width: 5.3rem;
 }
 
 #button {
