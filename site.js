@@ -14,11 +14,27 @@ const setUser = _ => {
   user.style.float = "right"
   navigationbar = document.querySelector("#navbar")
   navigationbar.appendChild(user)
+
+
+  // Read the cookie data
+  if (JSON.parse(document.cookie)["Username"] == username){
+    cookieObject = JSON.parse(document.cookie)
+    gameDatesSaved = []
+    for (key in cookieObject) {
+      if (key != "Username"){
+        console.log("Past selection date:", key)
+        gameDatesSaved.push(key)
+      } else {
+        console.log("Username:", cookieObject[key])
+      }
+    }
+    gameDatesSaved.forEach(gameDay => console.log(cookieObject[gameDay]))
+  }
+
 }
 
 const getDate = _ => {
   let gameDate = new Date()
-  let today = new Date()
 
   // Get the date of the next Saturday
   gameDate.setDate(gameDate.getDate()+0.5)
@@ -135,38 +151,44 @@ const select = (homeAway, teamNum) => {
 }
 
 const finalCheck = gameDate => { 
-  let games = document.getElementsByClassName("game")
+  let games = document.querySelectorAll(".game")
   let totalSelected = 0
   let notSelected = "" 
   let selections = {"Username":document.querySelector("#username").innerHTML}
   selections[gameDate] = {}
   for (let i=0; i<games.length; i++) {
-    selections[gameDate]["Game"+i] = {}
     let game = games[i]
     if (game.cells[0].selected) {
       console.log("Game",i+1,"home selected")
       totalSelected += 1
-      selections[gameDate]["Game" + i]["team"] = "HOME"
-      selections[gameDate]["Game" + i]["spread"] = game.querySelector(".versus").innerHTML
-      break
+      selections[gameDate]["Game"+i] = "HOME"
     } else {
       if (game.cells[2].selected) {
         console.log("Game",i+1,"away selected")
         totalSelected += 1
-        selections[gameDate]["Game" + i]["team"] = "AWAY"
-        selections[gameDate]["Game" + i]["spread"] = game.querySelector(".versus").innerHTML
-        break
+        selections[gameDate]["Game"+i] = "AWAY"
       } else {
         console.log("NO TEAM SELECTED GAME",i+1)
         notSelected += i+1+" "
-        break
       }
     }
   }
   console.log(selections)
   if (totalSelected != 25){
-    alert("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notSelected)
+    console.log("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notSelected)
   } else {
-    alert("Thank you for making your selections")
+    // Save the selections as a cookie
+    console.log("Thank you for making your selections")
+    cookieData = JSON.parse(document.cookie)
+    cookieData["Username"] = selections["Username"]
+    cookieData[gameDate] = selections[gameDate]
+    document.cookie = JSON.stringify(cookieData)
   }
+}
+
+// For ease of testing
+const homeSelectAll = _ => {
+  let homeTeams = document.querySelectorAll('.home')
+  homeTeams.forEach( node => node.click())
+  finalCheck(getDate())
 }
