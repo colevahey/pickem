@@ -10,27 +10,10 @@ const setUser = _ => {
   user = document.createElement("p")
   user.id = "username"
   user.innerHTML = username
-  user.style.color = "white"
   user.style.float = "right"
+  user.onclick = _ => openModal(username)
   navigationbar = document.querySelector("#navbar")
   navigationbar.appendChild(user)
-
-
-  // Read the cookie data
-  if (JSON.parse(document.cookie)["Username"] == username){
-    cookieObject = JSON.parse(document.cookie)
-    gameDatesSaved = []
-    for (key in cookieObject) {
-      if (key != "Username"){
-        console.log("Past selection date:", key)
-        gameDatesSaved.push(key)
-      } else {
-        console.log("Username:", cookieObject[key])
-      }
-    }
-    gameDatesSaved.forEach(gameDay => console.log(cookieObject[gameDay]))
-  }
-
 }
 
 const getDate = _ => {
@@ -191,4 +174,42 @@ const homeSelectAll = _ => {
   let homeTeams = document.querySelectorAll('.home')
   homeTeams.forEach( node => node.click())
   finalCheck(getDate())
+}
+
+const openModal = username => {
+  // Get the modal
+  let modal = document.getElementById('myModal');
+  
+  // Get the <span> element that closes the modal
+  let span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks the button, open the modal 
+  modal.style.display = "block";
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = _ => modal.style.display = "none"
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = e => {
+    if (e.target == modal) {
+      modal.style.display = "none"
+    }
+  }
+
+  // Read the cookie data
+  if (JSON.parse(document.cookie)["Username"] == username){
+    cookieObject = JSON.parse(document.cookie)
+    gameDatesSaved = []
+    for (key in cookieObject) {
+      if (key != "Username"){
+        console.log("Past selection date:", key)
+        gameDatesSaved.push(key)
+      } else {
+        console.log("Username:", cookieObject[key])
+      }
+    }
+    gameDatesSaved.forEach(gameDay => console.log(cookieObject[gameDay]))
+    document.querySelector(".modal-body").innerHTML = gameDatesSaved
+  }
+
 }
