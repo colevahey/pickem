@@ -119,8 +119,8 @@ const setGames = gameData => {
 }
 
 const select = (homeAway, teamNum) => {
-  selectedTeam = document.getElementsByClassName(homeAway)[teamNum]
-  partnerTeam = document.getElementsByClassName("homeaway".replace(homeAway,""))[teamNum]
+  let selectedTeam = document.getElementsByClassName(homeAway)[teamNum]
+  let partnerTeam = document.getElementsByClassName("homeaway".replace(homeAway,""))[teamNum]
   
   if (selectedTeam.selected == false) {
     selectedTeam.style = "background-color:#ff2d2d;"
@@ -157,9 +157,10 @@ const finalCheck = gameDate => {
     }
   }
   console.log(selections)
-  if (totalSelected != 25){
+  if (totalSelected != games.length){
     console.log("NOT ALL GAMES SELECTED\nPlease make selections for games:\n"+notSelected)
   } else {
+
     // Save the selections as a cookie
     console.log("Thank you for making your selections")
     cookieData = JSON.parse(document.cookie)
@@ -208,8 +209,9 @@ const openModal = username => {
         console.log("Username:", cookieObject[key])
       }
     }
-    gameDatesSaved.forEach(gameDay => console.log(cookieObject[gameDay]))
-    document.querySelector(".modal-body").innerHTML = gameDatesSaved
+    gameDatesSaved.forEach(gameDay => 
+      document.querySelector("#modal-data").innerHTML += JSON.stringify(cookieObject[gameDay])
+    )
   }
 
 }

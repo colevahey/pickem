@@ -80,6 +80,11 @@ body {
   background-color: #5cb85c;
   color: white;
 }
+
+#modal-data {
+  overflow: auto;
+}
+
 /* ---------------- */
 
 #maintitle {
