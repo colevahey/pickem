@@ -1,4 +1,4 @@
-const setUser = _ => {
+/*const setUser = _ => {
   let urlParams = new URLSearchParams(window.location.search)
   let username = ""
   try {
@@ -14,7 +14,7 @@ const setUser = _ => {
   user.onclick = _ => openModal(username)
   navigationbar = document.querySelector("#navbar")
   navigationbar.appendChild(user)
-}
+}*/
 
 const getDate = _ => {
   let gameDate = new Date()
@@ -177,6 +177,7 @@ const homeSelectAll = _ => {
   finalCheck(getDate())
 }
 
+// CALL TO OPEN MODAL openModal('colev')
 const openModal = username => {
   // Get the modal
   let modal = document.getElementById('myModal');
